@@ -15,4 +15,32 @@ addTaskButton.addEventListener("click" , () =>
     }
     const selectedDate = new Date(deadline);
     const currentDate = new Date();
-})
+
+    if (selectedDate <= currentDate){
+        alert ("Please select an upcoming date for the deadline.");
+        return;
+        // don't add task if the dedaline is not in the future
+    }
+const taskItem = document.createElement("div");
+taskItem.classList.add("task");
+taskItem.innerHTML = `
+<p>${task}</p>
+<p>Priority : ${priority}</p>
+<p>Deadline : ${deadline}</p>
+<button class = "mark-done">Mark Done </button>
+`;
+taskList.appendChild(taskItem);
+taskInput.value = "";
+priorityInput.value="top";
+deadlineInput.value= "";
+
+
+});
+taskList.addEventListener("click",(event)=>
+{
+    if (event.target.classlist.contains("mark-done")) {
+        const taskItem = event.target.parentElement;
+        taskItem.style.backgroundColor = "#f2f2f2";
+        event.target.disabled = true;
+    }
+});
